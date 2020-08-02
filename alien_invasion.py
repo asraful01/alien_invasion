@@ -31,7 +31,10 @@ class AlienInvasion:
             self._check_events()
             self.ship.update()
             self.bullets.update()
+            self._update_bullets()
             self._update_screen()
+
+            
 
     def _check_events(self):            
         # Watch for keyboard and mouse events.
@@ -64,8 +67,17 @@ class AlienInvasion:
 
     def _fire_bullet(self):
         """create a new bullet and add it tot he bullets group"""
-        new_bullet=Bullet(self)
-        self.bullets.add(new_bullet)
+        if len(self.bullets) < self.settings.bullets_allowed:
+            new_bullet=Bullet(self)
+            self.bullets.add(new_bullet)
+
+
+    def _update_bullets(self):
+        #Get rid of bullets taht have disapperaed
+        for bullet in self.bullets.copy():
+            if bullet.rect.bottom <= 0:
+                self.bullets.remove(bullet)
+        
    
     def _update_screen(self):
         """Update iamges on the screen, and flip to the new screen."""
