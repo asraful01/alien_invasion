@@ -35,6 +35,7 @@ class AlienInvasion:
             self.ship.update()
             self.bullets.update()
             self._update_bullets()
+            self.update_aliens()
             self._update_screen()
 
             
@@ -111,6 +112,10 @@ class AlienInvasion:
         self.aliens.add(alien)
         
    
+    def update_aliens(self):
+        """UPDATE the positions of all aliens in fleet"""
+        self.aliens.update()
+
     def _update_screen(self):
         """Update iamges on the screen, and flip to the new screen."""
         # Redraw the screen during each pass through the loop.
